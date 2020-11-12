@@ -167,9 +167,9 @@ Conv2d::Conv2d( Network *net, int out_ch, int kernelH, int kernelW,
     initCUDNN(deConv);
 
     // allocate warkspace
-    if (ws_sizeInBytes!=0) {
-        checkCuda( cudaMalloc(&workSpace, ws_sizeInBytes) );
-    }
+    //if (ws_sizeInBytes!=0) {
+    //    checkCuda( cudaMalloc(&workSpace, ws_sizeInBytes) );
+    //}
 
     //allocate data for infer result
     checkCuda( cudaMalloc(&dstData, output_dim.tot()*sizeof(dnnType)) );

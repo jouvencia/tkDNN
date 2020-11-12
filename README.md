@@ -214,6 +214,12 @@ make
 Once you have successfully created your rt file, run the demo: 
 ```
 ./demo yolo4_fp32.rt ../demo/yolo_test.mp4 y
+
+
+To run the an object detection demo with python (example with yolov4):
+```
+python darknetTR.py build/yolo4_fp16.rt --video=demo/yolo_test.mp4
+
 ```
 In general the demo program takes 7 parameters:
 ```
