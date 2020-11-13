@@ -137,6 +137,22 @@ def loop_detect(detect_m, video_path):
     print("frame:{},time:{:.3f},FPS:{:.2f}".format(cnt, end-start, cnt/(end-start)))
     stream.release()
 
+def loop_img_detect(dtect_m, images_path):
+    start = time.time()
+    cnt=0
+    for image in os.listdir(images_path):
+        image=cv2.imread(images_path + image)
+        start = time.time()
+        image = cv2.resize(image,
+                            (512, 512),
+                            interpolation=cv2.INTER_LINEAR)
+        detections = detect_m.detect(image, need_resize=False)
+        for det in detections:
+                print(det)
+        cnt += 1
+    end = time.time()
+    print("frame:{},time:{:.3f},FPS:{:.2f}".format(cnt, end-start, cnt/(end-start)))
+
 def img_detect(detect_m, image_path):
     image=cv2.imread(image_path)
     image = cv2.resize(image,
@@ -219,7 +235,7 @@ def parse_args():
 if __name__ == '__main__':
     args = parse_args()
     detect_m = YOLO4RT(weight_file=args.weight)
-    t = Thread(target=img_detect, args=(detect_m, args.image), daemon=True)
+    t = Thread(target=loop_img_detect, args=(detect_m, args.image), daemon=True)
 
     # thread1 = myThread(loop_detect, [detect_m])
 
